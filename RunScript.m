@@ -21,7 +21,7 @@ signalFileInfo = dir(signalFiles);
 recentDate = signalFileInfo(1).datenum;
 for n = 1:length(signalFileInfo)
     if signalFileInfo(n).datenum > recentDate
-        recentDate = fileInfo(n).datenum;
+        recentDate = signalFileInfo(n).datenum;
     end
 end
 
