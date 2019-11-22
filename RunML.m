@@ -18,11 +18,7 @@ waveRank = MLEval(featuresDir);
 rankFile = 'waveRank.txt';
 fileID = fopen(rankFile, 'w');
 for i = 1:length(waveRank)
-    if i < length(waveRank)
-        fprintf(fileID, '%d,', waveRank(i));
-    else
-        fprintf(fileID, '%d', waveRank(i));
-    end
+    fprintf(fileID, '%d,', waveRank(i));
 end
 fclose(fileID);
 

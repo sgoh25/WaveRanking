@@ -14,7 +14,7 @@ headerFile = fullfile(signalsDir,'Header.txt');
 numFile = 8;
 
 % Define initial Signal dir file info
-signalFiles = fullfile(signalsDir,'*.txt');
+signalFiles = fullfile(signalsDir,'Header.txt');
 signalFileInfo = dir(signalFiles);
 
 % Get most recent modification date
@@ -32,9 +32,6 @@ while true
     signalFileInfo = dir(signalFiles);
     for n = 1:length(signalFileInfo)
         if signalFileInfo(n).datenum > recentDate
-            
-            % Update most recent mod date
-            recentDate = signalFileInfo(n).datenum;
             
             % Obtain test wave from Header file
             headerInfo = csvread(headerFile);
@@ -54,7 +51,7 @@ while true
 
             % Plot ranked Waves in subplot
             waveRank = csvread('waveRank.txt');
-            for rank = 1:length(waveRank)
+            for rank = 1:length(waveRank)-1
                 waveNum = waveRank(rank);
                 wave = csvread(fullfile(signalsDir,sprintf('Wave%d.txt',waveNum)));
                 subplot(4,2,rank+1);
@@ -62,6 +59,9 @@ while true
                 title(sprintf('Rank %d: Wave %d',rank,waveNum));
             end
             drawnow;
+            
+            % Update most recent mod date
+            recentDate = signalFileInfo(n).datenum;
         end
     end
 end

@@ -4,13 +4,13 @@
 function FeatureExtract(dataFile, headerFile, featuresDir, label)
 
 % Define variables
-numWindows = 8;
-featuresList = ["testWave","kurtosis","max","mean","median","skewness","std"];
+numWindows = 1;
+featuresList = ["testWave","max","mean","median","skewness","std"];
 
 % If Wave file does not exist, return error message and quit
 if ~isfile(dataFile)
     fprintf('Error: The %s data file does not exist.\n', dataFile);
-    return;
+    % return;
 end
 
 % Read wave data and save to data variable array
@@ -20,13 +20,13 @@ data = csvread(dataFile);
 featureSelect = csvread(headerFile);
 featureFile = 'waveFeatures.txt';
 featureFileID = fopen(featureFile, 'w');
-for i = 1:length(featureSelect)
+for i = 1:length(featureSelect)-1
     fprintf(featureFileID, '%s,%d\n', featuresList(i), featureSelect(i));
 end
 fclose(featureFileID);
 
 % Open csv file for recording extracted features (named according to Wave #)
-fileName = fullfile(featuresDir,sprintf('/features%d.csv', label));
+fileName = fullfile(featuresDir,sprintf('/features%d.txt', label));
 fileID = fopen(fileName, 'w');
 
 % Split data into windows (8)
@@ -46,7 +46,7 @@ for win = 1:numWindows
     currData = data(iStart:iEnd);
 
     % Exract features and write to text file
-    features = [kurtosis(currData),max(currData),mean(currData),median(currData),skewness(currData),std(currData)];
+    features = [max(currData),mean(currData),median(currData),skewness(currData),std(currData)];
     for feat = 2:length(features)
         % Extract feature if selected in header file (skip first number = testWave)
         if featureSelect(feat) == 1

@@ -3,8 +3,8 @@
 function waveRank = MLEval(featuresDir)
 
 % Check if features_train file exists, return error and exit if not
-trainFeatureFile = fullfile(featuresDir,'features_train.csv');
-testFeatureFile = fullfile(featuresDir,'features_test.csv');
+trainFeatureFile = fullfile(featuresDir,'features_train.txt');
+testFeatureFile = fullfile(featuresDir,'features_test.txt');
 if ~isfile(trainFeatureFile)
     fprintf('Error: The feature_train.csv file does not exist.\n');
     return; % Exit the script

@@ -12,8 +12,8 @@ features_test = [];
 % Run feature matrix formation
 for num = 1:numFile      
     % Load data from feature files (%d is the Wave #)
-    featureFile = sprintf('features%d.csv', num-1);
-    featureData = csvread(sprintf(fullfile(featuresDir,featureFile)));
+    featureFile = sprintf('features%d.txt', num-1);
+    featureData = csvread(fullfile(featuresDir,featureFile));
     
     % If current Wave # is test wave, save to test matrix
     if (num-1 == testWave) 
@@ -26,14 +26,14 @@ for num = 1:numFile
 end
 
 % Save features_train matrix to csv file
-trainFeatureFile = fullfile(featuresDir,'features_train.csv');
+trainFeatureFile = fullfile(featuresDir,'features_train.txt');
 if isfile(trainFeatureFile)
     delete(trainFeatureFile); % If file already exists, delete and make new one
 end
 csvwrite(trainFeatureFile, features_train);
 
 % Save features_test matrix to csv file
-testFeatureFile = fullfile(featuresDir,'features_test.csv');
+testFeatureFile = fullfile(featuresDir,'features_test.txt');
 if isfile(testFeatureFile)
     delete(testFeatureFile); % If file already exists, delete and make new one
 end
