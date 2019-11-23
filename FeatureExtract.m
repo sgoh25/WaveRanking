@@ -1,4 +1,5 @@
-% [Funct] Function that extracts features for given data file and saves to corresponding features file
+% [2.5-Funct] Function that extracts features for given data file and saves to corresponding features file
+% Used in GenerateMLData.m
 
 % void FeatureExtract(str dataFile, int label)
 function FeatureExtract(dataFile, headerFile, featuresDir, label)
@@ -48,10 +49,7 @@ for win = 1:numWindows
     % Exract features and write to text file
     features = [max(currData),mean(currData),median(currData),skewness(currData),std(currData)];
     for feat = 1:length(features)
-        % Extract feature if selected in header file (skip first number = testWave)
-        if featureSelect(feat+1) == 1
-            fprintf(fileID, '%f,', features(feat));
-        end
+        fprintf(fileID, '%f,', features(feat));
     end
     
     % Increment data index

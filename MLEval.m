@@ -1,4 +1,4 @@
-% [4-Funct] Train and test/evaluate ML models using generated data (after GenerateFeatureMatrix)
+% [5-Funct] Train and test/evaluate ML models using generated data (after GenerateFeatureMatrix)
 
 function waveRank = MLEval(featuresDir)
 

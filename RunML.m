@@ -1,4 +1,4 @@
-% [5-Funct] Run entire ML code process (for given test Wave)
+% [6-Funct] Run entire ML code process (for given test Wave)
 
 function RunML(testWave, headerFile, mainDir, featuresDir, featuresDirOld, signalsDir, numFile)
 
@@ -11,7 +11,10 @@ GenerateMLData(headerFile, featuresDir, signalsDir, numFile);
 % [3] Generate train/test feature files (for given test Wave)
 GenerateTTFeatureMatrix(mainDir, featuresDir, numFile, testWave);
 
-% [4] Run ML evaluation (train/test) - obtain Wave ranking
+% [4] Perform weighting of features/predictors
+FeatureWeight(headerFile, featuresDir);
+
+% [5] Run ML evaluation (train/test) - obtain Wave ranking
 waveRank = MLEval(featuresDir);
 
 % Save wave ranking to txt file
