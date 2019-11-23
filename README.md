@@ -36,7 +36,7 @@ Import channel waveforms to the `Signals` directory, labelled in the form `Wave#
 
 ### Step 2
 
-Run `RunScript.m` in MATLAB. This script will loop continuously until the user quits the program with CTRL+C. The wave ranking process will execute when any file in the `Signals` directory is modified.
+Run `RunScript.m` in MATLAB. This script will loop continuously until the user quits the program with CTRL+C. The wave ranking process will execute when the `Header.txt` file in the `Signals` directory is modified.
 
 ### Step 3
 
