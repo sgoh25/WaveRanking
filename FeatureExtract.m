@@ -47,9 +47,9 @@ for win = 1:numWindows
 
     % Exract features and write to text file
     features = [max(currData),mean(currData),median(currData),skewness(currData),std(currData)];
-    for feat = 2:length(features)
+    for feat = 1:length(features)
         % Extract feature if selected in header file (skip first number = testWave)
-        if featureSelect(feat) == 1
+        if featureSelect(feat+1) == 1
             fprintf(fileID, '%f,', features(feat));
         end
     end
