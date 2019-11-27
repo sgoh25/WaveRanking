@@ -37,31 +37,36 @@ while true
             headerInfo = csvread(headerFile);
             testWave = headerInfo(1);
             
-            % [5] Run entire ML code process
-            RunML(testWave, headerFile, mainDir, featuresDir, featuresDirOld, signalsDir, numFile);
-            disp('Wave Rank Updated');
+            % If all weights = 0, don't run ML code
+            weights = headerInfo(1,2:length(headerInfo)-1);
             
-            % FOR TESTING
-            % Plot test Wave in subplot
-            figure;
-            wave = csvread(fullfile(signalsDir,sprintf('Wave%d.txt',testWave)));
-            subplot(4,2,1);
-            plot(wave);
-            title(sprintf('Test Wave: Wave %d',testWave));
+            if all(weights)
+                % [5] Run entire ML code process
+                RunML(testWave, headerFile, mainDir, featuresDir, featuresDirOld, signalsDir, numFile);
+                disp('Wave Rank Updated');
 
-            % Plot ranked Waves in subplot
-            waveRank = csvread('waveRank.txt');
-            for rank = 1:length(waveRank)-1
-                waveNum = waveRank(rank);
-                wave = csvread(fullfile(signalsDir,sprintf('Wave%d.txt',waveNum)));
-                subplot(4,2,rank+1);
+                % FOR TESTING
+                % Plot test Wave in subplot
+                figure;
+                wave = csvread(fullfile(signalsDir,sprintf('Wave%d.txt',testWave)));
+                subplot(4,2,1);
                 plot(wave);
-                title(sprintf('Rank %d: Wave %d',rank,waveNum));
+                title(sprintf('Test Wave: Wave %d',testWave));
+
+                % Plot ranked Waves in subplot
+                waveRank = csvread('waveRank.txt');
+                for rank = 1:length(waveRank)-1
+                    waveNum = waveRank(rank);
+                    wave = csvread(fullfile(signalsDir,sprintf('Wave%d.txt',waveNum)));
+                    subplot(4,2,rank+1);
+                    plot(wave);
+                    title(sprintf('Rank %d: Wave %d',rank,waveNum));
+                end
+                drawnow;
+
+                % Update most recent mod date
+                recentDate = signalFileInfo(n).datenum;
             end
-            drawnow;
-            
-            % Update most recent mod date
-            recentDate = signalFileInfo(n).datenum;
         end
     end
 end

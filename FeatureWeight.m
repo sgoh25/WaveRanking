@@ -7,7 +7,7 @@ headerInfo = csvread(headerFile);
 weights = headerInfo(1,2:length(headerInfo)-1);
 
 % Multiply each weight by 10 (for proportions)
-weights = weights*10;
+weights = weights*100;
 
 % Load train/test feature files
 trainFeatureFile = fullfile(featuresDir,'features_train.txt');
